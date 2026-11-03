@@ -1,0 +1,16 @@
+﻿node_modules/
+.next/
+out/
+build/
+*.log
+.env
+.env.local
+.env.*.local
+.vercel
+.DS_Store
+npm-debug.log*
+tsconfig.tsbuildinfo
+next-env.d.ts
+# media lives on Cloudinary (see scripts/upload-media.mjs)
+public/images/
+public/videos/
