@@ -34,7 +34,7 @@ export default function Hero() {
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-wine-cta/85 via-wine-dark/80 to-wine-cta/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(114,55,64,0.55)_0%,transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(63,19,21,0.75)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(64,18,21,0.55)_0%,transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(58,10,18,0.75)_0%,transparent_50%)]" />
 
         {!reduce && (
           <>
@@ -54,7 +54,7 @@ export default function Hero() {
           className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              "linear-gradient(#EEE8DF 1px, transparent 1px), linear-gradient(90deg, #EEE8DF 1px, transparent 1px)",
+              "linear-gradient(#EDE8DC 1px, transparent 1px), linear-gradient(90deg, #EDE8DC 1px, transparent 1px)",
             backgroundSize: "90px 90px",
           }}
         />
@@ -87,7 +87,7 @@ export default function Hero() {
             <SplitText
               as="h1"
               text="Redefining Urban Living Through Hospitality"
-              className="font-display text-4xl font-bold uppercase leading-[1.08] tracking-[0.01em] text-cream sm:text-5xl lg:text-[4.2rem] xl:text-[4.6rem]"
+              className="font-heading text-4xl font-medium leading-[1.08] tracking-[0.01em] text-cream sm:text-5xl lg:text-[4.2rem] xl:text-[4.6rem]"
               delay={0.4}
               stagger={0.07}
             />
@@ -107,7 +107,7 @@ export default function Hero() {
                   }}
                   className="flex items-start gap-4 font-body text-base leading-relaxed text-cream/85 lg:text-lg"
                 >
-                  <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-champagne shadow-[0_0_12px_#FCCAA5]" />
+                  <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-champagne shadow-[0_0_12px_#C98A6B]" />
                   {point}
                 </motion.li>
               ))}
@@ -143,7 +143,7 @@ export default function Hero() {
                 { n: "60", l: "Al Qasr Units" },
               ].map((s) => (
                 <div key={s.l}>
-                  <div className="font-display text-3xl font-bold text-champagne">{s.n}</div>
+                  <div className="font-heading text-3xl font-medium text-champagne">{s.n}</div>
                   <div className="mt-1 font-display text-[10px] uppercase tracking-[0.2em] text-cream/60">
                     {s.l}
                   </div>
@@ -163,9 +163,9 @@ export default function Hero() {
               <motion.div
                 whileHover={{ rotateY: 6, rotateX: -4, scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 120, damping: 15 }}
-                className="preserve-3d relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-champagne/25 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]"
+                className="preserve-3d relative aspect-[4/5] overflow-hidden rounded-none border border-champagne/25 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]"
                 style={{
-                  backgroundImage: `url('${media("/images/elevating.jpg")}')`,
+                  backgroundImage: `url('${media("/images/respecting.jpg")}')`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -175,7 +175,7 @@ export default function Hero() {
                   <p className="font-display text-[11px] uppercase tracking-[0.3em] text-champagne">
                     Luxakari Hospitality Group
                   </p>
-                  <p className="mt-2 font-display text-xl font-semibold leading-snug text-cream">
+                  <p className="mt-2 font-heading text-xl font-semibold leading-snug text-cream">
                     Elevating everyday living through personalized care
                   </p>
                 </div>
@@ -184,9 +184,9 @@ export default function Hero() {
               <motion.div
                 animate={reduce ? undefined : { y: [0, -14, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-card absolute -bottom-8 -left-10 rounded-2xl px-6 py-4 backdrop-blur-md"
+                className="glass-card absolute -bottom-8 -left-10 rounded-none px-6 py-4 backdrop-blur-md"
               >
-                <p className="font-display text-2xl font-bold text-gold">Premium</p>
+                <p className="font-heading text-2xl font-medium text-gold">Premium</p>
                 <p className="font-display text-[10px] uppercase tracking-[0.25em] text-wine/75">
                   Serviced Living
                 </p>
@@ -195,7 +195,7 @@ export default function Hero() {
               <motion.div
                 animate={reduce ? undefined : { y: [0, 12, 0] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="glass-card absolute -right-6 top-10 rounded-2xl px-5 py-3 backdrop-blur-md"
+                className="glass-card absolute -right-6 top-10 rounded-none px-5 py-3 backdrop-blur-md"
               >
                 <p className="font-display text-sm font-semibold text-wine">24/7 Guest Support</p>
               </motion.div>

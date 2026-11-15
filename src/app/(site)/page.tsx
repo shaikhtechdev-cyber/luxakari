@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import StaySearch from "@/components/sections/StaySearch";
 import HolyCities from "@/components/sections/HolyCities";
 import About from "@/components/sections/About";
 import Solutions from "@/components/sections/Solutions";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <StaySearch />
       <HolyCities />
       <About />
       <Solutions />

@@ -26,18 +26,17 @@ export default function SplitFeature({ image, alt, reverse = false, children }: 
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         className="relative"
       >
-        <div className="group relative aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-wine/15">
+        {/* Rounded photo with an offset gold corner frame, per the section mockups */}
+        <div className="group relative z-10 aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-copper/30">
           <motion.img
             src={image}
             alt={alt}
             className="h-full w-full object-cover"
-            whileHover={reduce ? undefined : { scale: 1.08 }}
+            whileHover={reduce ? undefined : { scale: 1.05 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-wine-cta/50 via-transparent to-gold/10" />
-          <div className="absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-wine/10 transition-all duration-500 group-hover:ring-gold/40" />
         </div>
-        <div className="absolute -bottom-5 -right-5 -z-10 h-28 w-28 rounded-2xl border border-wine/25" />
+        <div className="pointer-events-none absolute -bottom-6 -right-6 h-28 w-28 rounded-br-[2rem] border-b border-r border-copper/60" />
       </motion.div>
 
       <motion.div

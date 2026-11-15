@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Montserrat, Lato } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ScrollProgress from "@/components/ScrollProgress";
+import { Cinzel, Montserrat } from "next/font/google";
+import AuthProvider from "@/components/AuthProvider";
 import "./globals.css";
 
-const montserrat = Montserrat({
+// Brand typefaces (Brand Identity Book §04): Cinzel for display, Montserrat for text.
+const cinzel = Cinzel({
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cinzel",
   display: "swap",
 });
 
-const lato = Lato({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
-  variable: "--font-lato",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -45,13 +45,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${lato.variable}`}>
+    <html lang="en" className={`${cinzel.variable} ${montserrat.variable}`}>
       <body className="font-body antialiased">
-        <div className="noise-overlay" />
-        <ScrollProgress />
-        <Navbar />
-        {children}
-        <Footer />
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

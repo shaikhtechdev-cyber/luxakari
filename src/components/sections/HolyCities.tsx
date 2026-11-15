@@ -1,15 +1,7 @@
 "use client";
 
-import SplitText from "@/components/SplitText";
-import SplitFeature from "@/components/SplitFeature";
 import Reveal from "@/components/Reveal";
 import { media } from "@/lib/media";
-
-const KEY_POINTS = [
-  "Luxakari merges premium hospitality standards with sophisticated residential living.",
-  "We partner with landlords and developers to transform assets into thriving community-centric destinations.",
-  "Our services enhance property value, drive occupancy, and foster long-term tenant loyalty.",
-];
 
 const BANNER_COPY = [
   "Two billion souls hold Makkah and Madinah in their hearts. For generations, the dream of belonging to these blessed cities remained just that - a dream.",
@@ -51,33 +43,6 @@ const CITIES = [
 export default function HolyCities() {
   return (
     <>
-      {/* The Key */}
-      <section id="the-key" className="relative py-24 lg:py-28">
-        <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
-          <SplitFeature image={media("/images/key-wall.jpg")} alt="The Luxakari key wall">
-            <span className="section-label font-display">The Key</span>
-            <SplitText
-              as="h2"
-              text="Luxakari Is The Key"
-              className="font-display text-3xl font-bold uppercase leading-[1.15] text-wine sm:text-4xl lg:text-[2.75rem]"
-            />
-            <div className="mt-7 space-y-5">
-              {KEY_POINTS.map((point, i) => (
-                <Reveal
-                  as="p"
-                  index={i}
-                  key={point}
-                  className="flex items-start gap-4 font-body text-base leading-relaxed text-wine/80"
-                >
-                  <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-gold shadow-[0_0_10px_#BC6D1F]" />
-                  <span>{point}</span>
-                </Reveal>
-              ))}
-            </div>
-          </SplitFeature>
-        </div>
-      </section>
-
       {/* About Luxakari Arabia — full-bleed banner */}
       <section id="about-arabia" className="relative overflow-hidden py-20 lg:py-24">
         <div className="absolute inset-0 -z-10">
@@ -89,7 +54,7 @@ export default function HolyCities() {
         <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
           <div className="max-w-2xl">
             <span className="section-label text-peach">About</span>
-            <h2 className="font-display text-3xl font-bold uppercase leading-[1.15] text-peach sm:text-4xl lg:text-5xl">
+            <h2 className="font-heading text-3xl font-medium leading-[1.15] text-peach sm:text-4xl lg:text-5xl">
               About Luxakari Arabia
             </h2>
             <div className="divider-gold mt-6 w-32 opacity-80" />
@@ -118,7 +83,7 @@ export default function HolyCities() {
                 index={i}
                 key={city.id}
                 id={`holy-cities-${city.id}`}
-                className="glass-card group overflow-hidden rounded-[1.75rem]"
+                className="glass-card group overflow-hidden rounded-none"
               >
                 <div className="relative h-72 overflow-hidden lg:h-80">
                   <img
@@ -131,7 +96,7 @@ export default function HolyCities() {
                     <p className="font-display text-[10px] uppercase tracking-[0.35em] text-champagne">
                       {city.tag}
                     </p>
-                    <h3 className="mt-2 font-display text-3xl font-bold uppercase text-cream lg:text-4xl">
+                    <h3 className="mt-2 font-heading text-3xl font-medium text-cream lg:text-4xl">
                       {city.name}
                     </h3>
                   </div>

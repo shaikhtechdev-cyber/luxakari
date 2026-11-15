@@ -1,106 +1,109 @@
 "use client";
 
 import { motion } from "framer-motion";
+import {
+  Armchair,
+  BedDouble,
+  Building2,
+  CalendarDays,
+  Car,
+  Clock,
+  ConciergeBell,
+  Cpu,
+  Landmark,
+  MapPin,
+  Plane,
+  Route,
+  ShieldCheck,
+  Sparkles,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import CountUp from "@/components/CountUp";
 import { media } from "@/lib/media";
 
-const DIVISIONS = [
-  {
-    id: "lux-design",
-    title: "Lux Design",
-    image: media("/images/lux-design.png"),
-    lead: "Turnkey interior design, FF&E, kitchen solutions, end-to-end design, procurement, installation and operational expertise — transforming residential buildings into professionally managed serviced residences across Madinah, Makkah, Jeddah and Riyadh.",
-    points: [
-      "Interior Design Excellence — bespoke interior concepts that combine functionality, aesthetics and modern residential living standards.",
-      "Turnkey FF&E Solutions — complete procurement, supply and installation of furniture, fixtures and equipment tailored to each property type.",
-      "Kitchen Design & Fit-Outs — end-to-end kitchen planning, manufacturing coordination, supply and installation for residential developments and serviced residences.",
-      "Seamless Project Delivery — single-point management from concept development and material selection through installation and final handover.",
-      "Residential & Hospitality Expertise — solutions for apartments, serviced residences, compounds, student housing and hospitality-driven communities.",
-      "Value Enhancement — transform vacant or unfurnished units into move-in-ready residences that improve occupancy, rental yields and long-term asset value.",
-    ],
-  },
-  {
-    id: "lux-drive",
-    title: "Lux Drive",
-    image: media("/images/lux-drive.png"),
-    lead: "Seamless, luxury transportation experiences designed for comfort, efficiency and style — our premium vehicle network and professional chauffeurs ensure every journey reflects the highest hospitality standards.",
-    points: [
-      "Executive Transfers — chauffeur-driven cars for VIPs and corporate guests, ensuring punctuality, elegance and discretion.",
-      "Airport Transfers — smooth, reliable pick-up and drop-off at major airports with meticulous attention to detail.",
-      "Ziyarat Tours — private and group Ziyarat tours in Makkah and Madinah covering key religious landmarks and historical sites, tailored to guest preferences.",
-      "Event Transportation — luxury transportation solutions and professional drivers providing seamless mobility for groups and events.",
-      "City-to-City Travel — comfortable intercity transfers across the Kingdom, ideal for business, leisure and pilgrimage journeys.",
-      "Private & Group Tours — custom-curated transportation experiences showcasing Saudi Arabia's landmarks with personalized itineraries.",
-    ],
-  },
-  {
-    id: "lux-concierge",
-    title: "Lux Concierge",
-    image: media("/images/lux-concierge.png"),
-    lead: "Elevating hospitality and increasing owner revenue with a personalized concierge solution — available as a white-label app under your brand.",
-    points: [
-      "Restaurant & Entertainment Reservations — booking tables at local restaurants and securing tickets for concerts, shows or sporting events.",
-      "Local Recommendations — tailored suggestions for dining, sightseeing and unique local attractions and experiences.",
-      "Transportation Assistance — arranging airport transfers, private jets, taxis, rental cars or chauffeur services for guests.",
-      "Tour & Activity Planning — coordinating local tours, excursions and unique experiences with local partners.",
-      "Special Requests — fulfilling unique guest requests such as arranging gift deliveries, planning proposals or sourcing specific services.",
-      "Problem-Solving — addressing any issues or concerns guests may have to ensure a smooth and comfortable stay.",
-      "General Information — answering questions about hotel services, directions and local information.",
-      "Event & Business Services — providing or arranging business services, event planning and other special needs for guests.",
-    ],
-  },
-  {
-    id: "lux-spa",
-    title: "Lux Spa",
-    image: media("/images/lux-spa.png"),
-    lead: "Increase your revenue and transform residential living into a hotel-inspired wellness experience.",
-    points: [
-      "Design Excellence — concept development and interior design blending modern wellness standards with cultural aesthetics.",
-      "Turnkey Construction — end-to-end delivery of spa facilities, including treatment rooms, relaxation lounges, hydrotherapy areas and wellness amenities.",
-      "Seamless Integration — tailored layouts to fit within residential compounds or buildings without disrupting existing functionality.",
-      "Hotel-Level Operations — professional management of spa services, staffing, training and guest engagement programs.",
-      "Wellness-Centric Lifestyle — curated treatments, fitness and relaxation offerings that elevate resident satisfaction and attract premium tenants.",
-      "Value Enhancement — converts residential environments into holistic communities, strengthening property positioning and long-term returns.",
-    ],
-  },
-  {
-    id: "lux-hotel",
-    title: "Lux Hotel",
-    image: media("/images/lux-hotel.png"),
-    lead: "Partnering with landowners to transform land into hospitality assets through modular innovation.",
-    points: [
-      "Hospitality-Inspired Communities — end-to-end development of hotels, serviced apartments, student housing, workforce accommodation and hospitality-led communities.",
-      "Modular Construction — advanced off-site manufacturing and modular building systems that reduce construction timelines, improve quality control and accelerate delivery.",
-      "Landowner Partnerships — joint venture and profit-sharing models that enable landowners to unlock the value of their land without requiring hospitality development expertise.",
-      "Design & Engineering — integrated feasibility studies, master planning, architecture, engineering, interior design and hospitality concept development.",
-      "Hotel Operations & Asset Management — professional hotel management, revenue optimization, guest experience programs and operational excellence aligned with international hospitality standards.",
-      "Scalable Investment Platform — flexible development solutions for private investors, institutional partners, government partners and large-scale hospitality projects across Saudi Arabia and beyond.",
-    ],
-  },
-  {
-    id: "hospitality-technology",
-    title: "Hospitality Technology",
-    image: media("/images/hospitality-tech.png"),
-    lead: "Our associated company ShaikhTech provides all-in-one hospitality solutions enhancing comfort, safety and efficiency.",
-    points: [
-      "High-Speed WiFi & HSIA — secure connectivity with real-time monitoring.",
-      "IPTV & Interactive Portals — multilingual, on-demand and live channels.",
-      "Property Management System — reservations, check-ins, billing and reporting.",
-      "Smart Access & Safety — digital keys, smart locks, CCTV and access control.",
-      "Building & Room Automation — smart controls for lighting, HVAC and housekeeping.",
-    ],
-  },
+/* ---------- content (from the Luxakari section mockups) ---------- */
+
+const DESIGN_POINTS: [string, string][] = [
+  ["Interior Design Excellence", "Bespoke interiors that combine the warmth of Madinah with modern, minimalistic living standards."],
+  ["Turnkey FF&E Solution", "Complete procurement, setup, and installation of furniture, fixtures and equipment tailored to your property."],
+  ["Built-in Cabinetry & Smart Storage", "Custom cabinetry and efficient storage solutions that maximize space, functionality, and the overall living experience."],
+  ["Premium Finishes", "High-quality materials and thoughtful detailing that ensure durability, elegance, and long-term value."],
+  ["Comfort & Hospitality Focus", "Residences prepared for a refined living experience, whether for personal use, seasonal stays, or rental income."],
 ];
 
-const MARQUEE_WORDS = [
-  "Lux Design",
-  "Lux Drive",
-  "Lux Concierge",
-  "Lux Spa",
-  "Lux Hotel",
-  "Hospitality Technology",
+const DRIVE_POINTS: [LucideIcon, string, string][] = [
+  [Car, "Premium Chauffeurs", "Professional, courteous drivers trained to deliver a safe and refined travel experience."],
+  [MapPin, "Madinah Focus", "Deep local knowledge for smooth, timely, and hassle-free travel across the city."],
+  [Clock, "Flexible Booking", "On-demand, scheduled, and long-term options to suit your lifestyle and stay."],
+  [Armchair, "Comfort & Privacy", "Modern, well-maintained vehicles with a focus on comfort, convenience, and discretion."],
+  [Users, "For Residents & Guests", "Tailored services for residents, family, and visiting guests."],
+  [ShieldCheck, "Reliable & Trusted", "A commitment to safety, punctuality, and a consistently high standard of service."],
 ];
+
+const CONCIERGE_POINTS: [LucideIcon, string, string][] = [
+  [ConciergeBell, "Dedicated Concierge Support", "a single point of contact for all your travel, stay, and lifestyle needs."],
+  [Plane, "Seamless Travel Arrangements", "airport transfers, private chauffeur services, and city-to-city travel."],
+  [Landmark, "Ziyarah Tours", "guided visits to the key historical and religious sites in and around Madinah."],
+  [CalendarDays, "Event Assistance", "planning and coordination for group visits, gatherings, and special events."],
+  [BedDouble, "Hotel & Dining Bookings", "curated accommodation and restaurant options to suit your preferences."],
+  [Users, "Property & Stay Management", "value-added support for property owners and long-term residents."],
+  [Route, "Personalised Itineraries", "tailor-made plans to make every stay in Madinah more meaningful and seamless."],
+];
+
+const MORE: [LucideIcon, string, string, string][] = [
+  [Sparkles, "lux-spa", "Lux Spa", "Hotel-inspired wellness facilities designed, built and operated inside residential buildings."],
+  [Building2, "lux-hotel", "Lux Hotel", "Partnering with landowners to turn land into hospitality assets through modular construction."],
+  [Cpu, "hospitality-technology", "Hospitality Technology", "WiFi, IPTV, PMS, smart access and room automation through our associate company ShaikhTech."],
+];
+
+const MARQUEE_WORDS = ["Lux Design", "Lux Drive", "Lux Concierge", "Lux Spa", "Lux Hotel", "Hospitality Technology"];
+
+/* ---------- building blocks ---------- */
+
+const reveal = {
+  initial: { opacity: 0, y: 50 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+} as const;
+
+function Title({ eyebrow, word, boxed = false }: { eyebrow: string; word: string; boxed?: boolean }) {
+  return (
+    <>
+      <span className="section-label font-display">{eyebrow}</span>
+      <h3 className="font-heading text-4xl font-semibold uppercase leading-none text-wine sm:text-5xl">
+        Lux{" "}
+        {boxed ? (
+          <span className="inline-block bg-maroon px-3 pb-1 pt-2 text-cream">{word}</span>
+        ) : (
+          <span className="text-copper">{word}</span>
+        )}
+      </h3>
+      <div className="divider-gold mt-5 w-20" />
+    </>
+  );
+}
+
+function IconRows({ items }: { items: [LucideIcon, string, string][] }) {
+  return (
+    <ul className="mt-7 divide-y divide-wine/10">
+      {items.map(([Icon, title, text]) => (
+        <li key={title} className="flex items-center gap-5 py-3.5">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-copper/15 bg-ivory text-copper shadow-[0_6px_14px_-8px_rgba(58,10,18,0.35)]">
+            <Icon className="h-5 w-5" strokeWidth={1.75} />
+          </span>
+          <p className="font-body text-[15px] leading-relaxed text-warmbrown">
+            <strong className="font-semibold text-wine">{title}</strong> – {text}
+          </p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------- section ---------- */
 
 export default function Divisions() {
   return (
@@ -111,10 +114,8 @@ export default function Divisions() {
           <div className="flex min-w-max animate-marquee items-center gap-14 pr-14">
             {[...MARQUEE_WORDS, ...MARQUEE_WORDS, ...MARQUEE_WORDS].map((w, i) => (
               <span key={i} className="flex items-center gap-14">
-                <span className="font-display text-2xl font-bold uppercase tracking-[0.15em] text-wine/75 transition-colors duration-500 hover:text-gold sm:text-4xl">
-                  {w}
-                </span>
-                <span className="h-2 w-2 shrink-0 rotate-45 bg-gold/70" />
+                <span className="font-heading text-2xl font-medium tracking-[0.15em] text-wine/75 sm:text-4xl">{w}</span>
+                <span className="h-2 w-2 shrink-0 rotate-45 bg-copper/70" />
               </span>
             ))}
           </div>
@@ -122,14 +123,10 @@ export default function Divisions() {
       </div>
 
       <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
-        <SectionHeading
-          label="Divisions"
-          title="A Complete Hospitality Ecosystem"
-          titleClassName="text-gold-gradient"
-        />
+        <SectionHeading label="Divisions" title="A Complete Hospitality Ecosystem" />
 
         {/* Stats strip */}
-        <div className="mb-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mb-20 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
             { v: 208, l: "Serviced Residences" },
             { v: 6, l: "Divisions" },
@@ -142,77 +139,120 @@ export default function Divisions() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 * i }}
-              className="glass-card-hover rounded-2xl p-6 text-center"
+              className="glass-card p-6 text-center"
             >
-              <div className="font-display text-3xl font-bold text-gold lg:text-4xl">
+              <div className="font-heading text-3xl font-medium text-copper lg:text-4xl">
                 <CountUp to={s.v} suffix={s.s ?? ""} />
               </div>
-              <div className="mt-2 font-display text-[10px] uppercase tracking-[0.22em] text-wine/70">
-                {s.l}
-              </div>
+              <div className="mt-2 font-display text-[10px] uppercase tracking-[0.22em] text-taupe">{s.l}</div>
             </motion.div>
           ))}
         </div>
 
-        <div className="space-y-24 lg:space-y-32">
-          {DIVISIONS.map((d, i) => (
-            <motion.div
-              key={d.id}
-              id={d.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className={`grid items-center gap-10 lg:grid-cols-2 lg:gap-16 ${
-                i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              <div className="group relative">
-                <motion.div
-                  whileHover={{ scale: 1.03, rotate: i % 2 ? -1 : 1 }}
-                  transition={{ type: "spring", stiffness: 120, damping: 18 }}
-                  className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-wine/15 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
-                >
-                  <img
-                    src={d.image}
-                    alt={d.title}
-                    className="h-full w-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cream/75 via-cream/10 to-transparent" />
-                  <span className="absolute left-6 top-6 rounded-full bg-cream/70 px-4 py-1.5 font-display text-[10px] uppercase tracking-[0.3em] text-gold-dark backdrop-blur">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </motion.div>
-              </div>
+        <div className="space-y-28 lg:space-y-36">
+          {/* 01 · Lux Design — collage left, text right */}
+          <motion.div id="lux-design" {...reveal} className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
+            <div className="relative overflow-hidden rounded-[1.75rem]">
+              <img
+                src={media("/images/lux-design-collage.jpg")}
+                alt="Lux Design interiors: living room, dressing room and bedroom"
+                className="w-full"
+              />
+              <span className="absolute left-7 top-7 rounded-full bg-white/90 px-4 py-1.5 font-display text-xs font-semibold text-wine shadow">
+                01 / 03
+              </span>
+            </div>
+            <div>
+              <Title eyebrow="Interior" word="Design" />
+              <p className="mt-6 font-body text-[17px] leading-relaxed text-warmbrown">
+                Timeless interior design, FF&amp;E, built-in cabinetry, and in-rental design, which ensures hotel-level
+                quality combined with long-term durability. From refined building finishes to fully fitted residences
+                across Madinah, each detail reflects Luxakari&apos;s commitment to comfort, quality, and value.
+              </p>
+              <ul className="mt-6 divide-y divide-wine/10">
+                {DESIGN_POINTS.map(([title, text]) => (
+                  <li key={title} className="flex items-start gap-4 py-3.5">
+                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rotate-45 bg-copper" />
+                    <p className="font-body text-[15px] leading-relaxed text-warmbrown">
+                      <strong className="font-semibold text-wine">{title}</strong> – {text}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
 
-              <div>
-                <span className="section-label font-display">Division</span>
-                <h3 className="font-display text-3xl font-bold uppercase text-wine sm:text-4xl">
-                  {d.title.split(" ").map((word, wi) => (
-                    <span key={wi} className={wi === 1 ? "text-gold-gradient" : ""}>
-                      {word}{" "}
-                    </span>
-                  ))}
-                </h3>
-                <p className="mt-4 font-body text-lg leading-relaxed text-wine/85">{d.lead}</p>
-                <ul className="mt-7 space-y-3.5">
-                  {d.points.map((p, pi) => (
-                    <motion.li
-                      key={p}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.05 * pi, duration: 0.5 }}
-                      className="group flex items-start gap-3.5 font-body text-sm leading-relaxed text-wine/70 transition-colors hover:text-wine"
-                    >
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rotate-45 bg-gold transition-transform duration-300 group-hover:scale-150" />
-                      {p}
-                    </motion.li>
-                  ))}
-                </ul>
+          {/* 02 · Lux Drive — text left, photo right with gold corner brackets */}
+          <motion.div id="lux-drive" {...reveal} className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+            <div className="order-2 lg:order-1">
+              <Title eyebrow="Division" word="Drive" />
+              <p className="mt-6 font-body text-[17px] leading-relaxed text-warmbrown">
+                Lux Drive is our premium chauffeur service in Madinah, offering reliable, comfortable, and discreet
+                transportation for residents, visitors, and business travellers.
+              </p>
+              <IconRows items={DRIVE_POINTS} />
+            </div>
+            <div className="relative order-1 px-5 py-5 lg:order-2">
+              <div className="pointer-events-none absolute left-0 top-0 h-32 w-36 rounded-tl-[2rem] border-l-2 border-t-2 border-copper/70" />
+              <div className="pointer-events-none absolute bottom-0 right-0 h-48 w-36 rounded-br-[2rem] border-b-2 border-r-2 border-copper/70" />
+              <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem]">
+                <img
+                  src={media("/images/lux-drive-chauffeur.jpg")}
+                  alt="A Lux Drive chauffeur holding the car door, with Masjid an-Nabawi behind"
+                  className="h-full w-full object-cover"
+                />
               </div>
-            </motion.div>
-          ))}
+              <span className="absolute left-10 top-10 rounded-full bg-white/90 px-4 py-1.5 font-display text-xs font-semibold text-wine shadow">
+                02 / 03
+              </span>
+            </div>
+          </motion.div>
+
+          {/* 03 · Lux Concierge — photo left, text right (shown once, right after Lux Drive) */}
+          <motion.div id="lux-concierge" {...reveal} className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+            <div className="relative">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] border-4 border-white shadow-[0_30px_60px_-25px_rgba(58,10,18,0.45)]">
+                <img
+                  src={media("/images/lux-concierge-desk.jpg")}
+                  alt="A concierge desk with a brass service bell and white flowers"
+                  className="h-full w-full object-cover object-left"
+                />
+              </div>
+              <span className="absolute left-6 top-6 rounded-full bg-white/90 px-4 py-1.5 font-display text-xs font-semibold text-wine shadow">
+                03 / 03
+              </span>
+            </div>
+            <div>
+              <Title eyebrow="Division" word="Concierge" boxed />
+              <p className="mt-6 font-body text-[17px] leading-relaxed text-warmbrown">
+                Elevating your stay in Madinah with a premium concierge service that combines comfort, convenience,
+                and local expertise.
+              </p>
+              <IconRows items={CONCIERGE_POINTS} />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Other divisions — short boxes only */}
+        <div className="mt-28 lg:mt-36">
+          <span className="section-label font-display">Also From Luxakari</span>
+          <div className="mt-2 grid gap-5 md:grid-cols-3">
+            {MORE.map(([Icon, id, title, text], i) => (
+              <motion.div
+                key={id}
+                id={id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * i }}
+                className="glass-card p-7"
+              >
+                <Icon className="h-6 w-6 text-copper" strokeWidth={1.75} />
+                <h4 className="mt-4 font-heading text-xl font-semibold text-wine">{title}</h4>
+                <p className="mt-2 font-body text-sm leading-relaxed text-warmbrown">{text}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

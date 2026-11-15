@@ -6,6 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { media } from "@/lib/media";
+import AccountMenu from "./AccountMenu";
 
 interface MenuLink {
   name: string;
@@ -20,10 +21,10 @@ interface MenuItem {
 
 const MENU: MenuItem[] = [
   { name: "Home", href: "/" },
-  { name: "About", href: "#about" },
+  { name: "About", href: "/#about" },
   {
     name: "Suites",
-    href: "#hubspot-form",
+    href: "/#hubspot-form",
     children: [
       { name: "Booking.com", href: "https://www.booking.com/hotel/sa/kafd-one-bedroom-apartment.html" },
       { name: "Airbnb", href: "https://www.airbnb.com/l/eoiRbrRy" },
@@ -32,16 +33,16 @@ const MENU: MenuItem[] = [
   },
   {
     name: "Portfolio",
-    href: "#lux-residences",
+    href: "/#lux-residences",
     children: [
-      { name: "KEC Madinah", href: "#lux-residences-kec-madinah" },
-      { name: "Ayn Al Khaif", href: "#lux-residences-ayn-al-khaif" },
-      { name: "Al Qasr", href: "#lux-residences-al-qasr" },
+      { name: "KEC Madinah", href: "/#lux-residences-kec-madinah" },
+      { name: "Ayn Al Khaif", href: "/#lux-residences-ayn-al-khaif" },
+      { name: "Al Qasr", href: "/#lux-residences-al-qasr" },
     ],
   },
-  { name: "Booking", href: "#hubspot-form" },
-  { name: "Luxdrive", href: "#lux-drive" },
-  { name: "Contact", href: "#contact" },
+  { name: "Booking", href: "/#hubspot-form" },
+  { name: "Luxdrive", href: "/#lux-drive" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
@@ -73,21 +74,32 @@ export default function Navbar() {
       >
         <div
           className={`transition-all duration-500 ${
-            scrolled ? "bg-wine-cta/95 shadow-[0_6px_24px_-12px_rgba(51,1,2,0.6)] backdrop-blur-md" : ""
+            scrolled ? "bg-wine-cta/95 shadow-[0_6px_24px_-12px_rgba(58,10,18,0.6)] backdrop-blur-md" : ""
           }`}
         >
-          <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 lg:px-10">
-            <Link href="/" className="group relative flex items-center gap-3">
-              <motion.div whileHover={{ scale: 1.05 }} transition={{ type: "spring", stiffness: 300 }}>
+          <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-3 lg:px-10">
+            {/* Brand §02: full lockup only where it can be ≥160px wide; smaller
+                screens use the key emblem with the Cinzel text wordmark. */}
+            <Link href="/" aria-label="Luxakari Hospitality Group — home" className="flex items-center">
+              <Image
+                src={media("/images/logo-horizontal.png")}
+                alt="Luxakari Hospitality Group"
+                width={1152}
+                height={484}
+                priority
+                className="hidden h-[68px] w-auto lg:block"
+              />
+              <span className="flex items-center gap-3 lg:hidden">
                 <Image
-                  src={media("/images/logo.png")}
-                  alt="Luxakari Hospitality Group"
-                  width={170}
-                  height={44}
+                  src={media("/images/logo-emblem.png")}
+                  alt=""
+                  width={248}
+                  height={525}
                   priority
-                  className="h-9 w-auto lg:h-11"
+                  className="h-11 w-auto"
                 />
-              </motion.div>
+                <span className="font-heading text-lg font-medium tracking-[0.3em] text-champagne">LUXAKARI</span>
+              </span>
             </Link>
 
             <ul className="hidden items-center gap-1 xl:flex">
@@ -125,7 +137,7 @@ export default function Navbar() {
                         transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                         className="absolute left-0 top-full pt-3"
                       >
-                        <div className="min-w-[230px] rounded-2xl border border-cream/10 bg-wine-cta p-2 shadow-2xl">
+                        <div className="min-w-[230px] rounded-none border border-cream/10 bg-wine-cta p-2 shadow-2xl">
                           {item.children.map((child, ci) => (
                             <motion.a
                               key={child.name}
@@ -135,7 +147,7 @@ export default function Navbar() {
                               initial={{ opacity: 0, x: -8 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.05 + ci * 0.05 }}
-                              className="group flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 font-body text-sm text-cream/80 transition-all duration-300 hover:bg-champagne/10 hover:pl-5 hover:text-champagne"
+                              className="group flex items-center justify-between gap-3 rounded-none px-4 py-2.5 font-body text-sm text-cream/80 transition-all duration-300 hover:bg-champagne/10 hover:pl-5 hover:text-champagne"
                             >
                               {child.name}
                               <ArrowUpRight className="h-3.5 w-3.5 opacity-0 transition-all duration-300 group-hover:opacity-100" />
@@ -150,7 +162,8 @@ export default function Navbar() {
             </ul>
 
             <div className="flex items-center gap-3">
-              <a href="#hubspot-form" className="btn-cream btn-shine hidden !px-7 !py-3 sm:inline-flex">
+              <AccountMenu />
+              <a href="/#hubspot-form" className="btn-cream btn-shine hidden !px-7 !py-3 sm:inline-flex">
                 Book Now
               </a>
               <button
@@ -191,7 +204,7 @@ export default function Navbar() {
                   <a
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block font-display text-lg font-semibold uppercase tracking-[0.2em] text-cream"
+                    className="block font-heading text-lg font-semibold tracking-[0.2em] text-cream"
                   >
                     {item.name}
                   </a>
@@ -211,8 +224,14 @@ export default function Navbar() {
                   )}
                 </motion.div>
               ))}
+              <motion.div
+                variants={{ hidden: { opacity: 0, x: -30 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5 } } }}
+                className="border-b border-cream/15 py-3"
+              >
+                <AccountMenu variant="mobile" onNavigate={() => setMobileOpen(false)} />
+              </motion.div>
               <motion.a
-                href="#hubspot-form"
+                href="/#hubspot-form"
                 onClick={() => setMobileOpen(false)}
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                 className="btn-cream btn-shine mt-8 self-start"

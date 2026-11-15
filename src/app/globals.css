@@ -3,13 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --wine: #723740;
-  --wine-dark: #3f1315;
-  --wine-darkest: #330102;
-  --cream: #eee8df;
-  --champagne: #fccaa5;
-  --peach: #ffcda5;
-  --gold: #bc6d1f;
+  /* Luxakari Brand Identity Book v1.1 — §03 Colour */
+  --maroon: #3a0a12; /* Deep Maroon */
+  --maroon-ink: #401215;
+  --maroon-raised: #4d1820;
+  --maroon-line: #6b3840;
+  --rosegold: #c98a6b;
+  --cream: #ede8dc;
+  --ivory: #f6f2ea;
+  --dustyrose: #8f4650;
+  --copper: #9a5a3e;
+  --warmbrown: #5a4240;
+  --taupe: #7a625c;
+  --sand: #d9c9bd;
+
+  /* legacy names used across components */
+  --wine: var(--maroon-ink);
+  --wine-dark: var(--maroon);
+  --wine-darkest: var(--maroon);
+  --champagne: var(--rosegold);
+  --peach: var(--rosegold);
+  --gold: var(--copper);
 }
 
 html {
@@ -19,7 +33,7 @@ html {
 body {
   background-color: var(--cream);
   color: var(--wine);
-  font-family: var(--font-lato), sans-serif;
+  font-family: var(--font-montserrat), Arial, sans-serif;
   overflow-x: hidden;
 }
 
@@ -36,22 +50,33 @@ body {
   background: var(--cream);
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #723740, #bc6d1f);
+  background: linear-gradient(180deg, var(--maroon), var(--rosegold));
   border-radius: 999px;
 }
 
+@layer base {
+  /* Cinzel for headings (weights 500 / 600), per Brand Identity Book §04. */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-cinzel), Georgia, serif;
+    font-weight: 500;
+  }
+}
+
 @layer components {
+  /* Montserrat for eyebrows, labels, navigation and buttons. */
   .font-display {
-    font-family: var(--font-montserrat), sans-serif;
+    font-family: var(--font-montserrat), Arial, sans-serif;
   }
 
   .text-outline {
     color: transparent;
-    -webkit-text-stroke: 1px rgb(114 55 64 / 40%);
+    -webkit-text-stroke: 1px rgb(64 18 21 / 40%);
   }
 
   .text-gold-gradient {
-    background: linear-gradient(120deg, #9c5a12 0%, #bc6d1f 35%, #d98a3a 50%, #bc6d1f 65%, #9c5a12 100%);
+    background: linear-gradient(120deg, #7a3f2c 0%, #9a5a3e 35%, #b4755a 50%, #9a5a3e 65%, #7a3f2c 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
@@ -60,7 +85,7 @@ body {
   }
 
   .bg-gold-gradient {
-    background: linear-gradient(120deg, #9c5a12 0%, #bc6d1f 40%, #d98a3a 55%, #bc6d1f 75%, #9c5a12 100%);
+    background: linear-gradient(120deg, #b07254 0%, #c98a6b 40%, #e2ac8c 55%, #c98a6b 75%, #b07254 100%);
     background-size: 200% auto;
     transition: background-position 0.8s ease;
   }
@@ -77,24 +102,24 @@ body {
 
   .btn-cream {
     @apply btn bg-white text-wine;
-    box-shadow: 0 10px 30px -12px rgb(51 1 2 / 35%);
+    box-shadow: 0 10px 30px -12px rgb(58 10 18 / 35%);
   }
 
   .btn-cream:hover {
-    background: #fffdf9;
+    background: var(--ivory);
     transform: translateY(-3px);
-    box-shadow: 0 18px 40px -12px rgb(51 1 2 / 45%);
+    box-shadow: 0 18px 40px -12px rgb(58 10 18 / 45%);
   }
 
   .btn-dark {
     @apply btn bg-wine-dark text-cream;
-    box-shadow: 0 10px 30px -12px rgb(63 19 21 / 45%);
+    box-shadow: 0 10px 30px -12px rgb(58 10 18 / 45%);
   }
 
   .btn-dark:hover {
-    background: #5a1f22;
+    background: var(--maroon-raised);
     transform: translateY(-3px);
-    box-shadow: 0 18px 42px -12px rgb(63 19 21 / 55%);
+    box-shadow: 0 18px 42px -12px rgb(58 10 18 / 55%);
   }
 
   .btn-outline {
@@ -103,7 +128,7 @@ body {
 
   .btn-outline:hover {
     border-color: var(--wine);
-    background: rgb(114 55 64 / 8%);
+    background: rgb(64 18 21 / 8%);
     transform: translateY(-3px);
   }
 
@@ -111,7 +136,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(105deg, transparent 40%, rgb(114 55 64 / 18%) 50%, transparent 60%);
+    background: linear-gradient(105deg, transparent 40%, rgb(64 18 21 / 18%) 50%, transparent 60%);
     transform: translateX(-120%);
     transition: transform 0.9s ease;
   }
@@ -120,11 +145,14 @@ body {
     transform: translateX(120%);
   }
 
-  /* Cards */
+  /* Cards — brand "top-ruled cards": square-cornered Ivory with a
+     rose-gold top edge, no shadows. */
   .glass-card {
-    background: #fffdf9;
-    border: 1px solid rgb(114 55 64 / 12%);
-    box-shadow: 0 4px 24px -12px rgb(51 1 2 / 12%);
+    background: var(--ivory);
+    border: 1px solid rgb(64 18 21 / 10%);
+    border-top: 3px solid var(--rosegold);
+    border-radius: 0 !important;
+    box-shadow: none;
   }
 
   .glass-card-hover {
@@ -132,9 +160,9 @@ body {
   }
 
   .glass-card-hover:hover {
-    border-color: rgb(188 109 31 / 45%);
-    transform: translateY(-6px);
-    box-shadow: 0 26px 50px -22px rgb(51 1 2 / 25%);
+    border-color: rgb(201 138 107 / 55%);
+    border-top-color: var(--copper);
+    transform: translateY(-4px);
   }
 
   .panel-dark {
@@ -142,14 +170,17 @@ body {
     color: var(--cream);
   }
 
+  /* Brand "eyebrow over heading": short spaced Montserrat 600 label
+     (Dusty Rose on Cream; sections on maroon override with text-champagne). */
   .section-label {
-    @apply mb-5 inline-flex items-center gap-3 font-display text-[11px] font-semibold uppercase tracking-[0.4em] text-gold-dark;
+    @apply mb-5 inline-flex items-center gap-3 font-display text-[11px] font-semibold uppercase tracking-[0.3em] text-gold-dark;
   }
 
+  /* Brand "rose-gold rule": a short 3pt line under titles and key headlines. */
   .divider-gold {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #bc6d1f, #fccaa5, #bc6d1f, transparent);
-    opacity: 0.7;
+    height: 3px;
+    max-width: 5rem;
+    background: var(--rosegold);
   }
 
   .honorific {
@@ -159,12 +190,12 @@ body {
   }
 
   .input-field {
-    @apply w-full rounded-xl border border-wine/20 bg-white px-4 py-3 text-sm text-wine outline-none transition-all duration-300 placeholder:text-wine/40;
+    @apply w-full rounded-none border border-wine/20 bg-white px-4 py-3 text-sm text-wine outline-none transition-all duration-300 placeholder:text-wine/40;
   }
 
   .input-field:focus {
     border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgb(188 109 31 / 18%);
+    box-shadow: 0 0 0 3px rgb(201 138 107 / 18%);
   }
 }
 

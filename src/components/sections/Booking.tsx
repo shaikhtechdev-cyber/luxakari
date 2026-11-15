@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -26,6 +26,7 @@ const PROPERTIES = [
   "KEC Madinah — Lux Residences",
   "Ayn Al Khaif — Lux Residences",
   "Al Qasr — Lux Residences",
+  "Project 12 — Lux Residences",
   "Lux Drive — Transportation",
   "Lux Design — Interior Solutions",
 ];
@@ -60,11 +61,42 @@ const SOCIALS = [
   { icon: <Youtube className="h-4 w-4" />, href: "https://www.youtube.com/@Luxakari" },
 ];
 
+export interface BookingPrefill {
+  property?: string;
+  checkIn?: string;
+  checkOut?: string;
+  guests?: number;
+}
+
 const PAYMENTS = ["pay-1.png", "pay-2.png", "pay-3.png", "pay-4.png", "pay-5.png", "pay-6.png"];
 
 export default function Booking() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
+
+  // Filled in by the stay search ("Book now" on a property card) via a window event.
+  useEffect(() => {
+    function onPrefill(e: Event) {
+      const d = (e as CustomEvent<BookingPrefill>).detail ?? {};
+      setStatus("idle");
+      // wait a tick so the form is mounted again if the success screen was showing
+      setTimeout(() => {
+        const form = document.querySelector<HTMLFormElement>("#hubspot-form form");
+        if (!form) return;
+        const set = (name: string, value?: string | number) => {
+          const el = form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | null;
+          if (el && value !== undefined && value !== "") el.value = String(value);
+        };
+        if (d.property && PROPERTIES.includes(d.property)) set("property", d.property);
+        set("checkIn", d.checkIn);
+        set("checkOut", d.checkOut);
+        set("guests", d.guests);
+        (form.elements.namedItem("name") as HTMLInputElement | null)?.focus({ preventScroll: true });
+      }, 50);
+    }
+    window.addEventListener("luxakari:prefill-booking", onPrefill);
+    return () => window.removeEventListener("luxakari:prefill-booking", onPrefill);
+  }, []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -104,7 +136,7 @@ export default function Booking() {
 
   return (
     <section id="hubspot-form" className="relative overflow-hidden py-24 lg:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(114,55,64,0.10)_0%,transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(64,18,21,0.10)_0%,transparent_50%)]" />
 
       <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
         <SectionHeading
@@ -115,9 +147,9 @@ export default function Booking() {
 
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Form */}
-          <Reveal index={0} className="glass-card relative overflow-hidden rounded-[2rem] p-8 lg:p-10">
-            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#BC6D1F]/20 blur-[80px]" />
-            <h3 className="font-display text-lg font-bold uppercase tracking-[0.15em] text-wine">
+          <Reveal index={0} className="glass-card relative overflow-hidden rounded-none p-8 lg:p-10">
+            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#C98A6B]/20 blur-[80px]" />
+            <h3 className="font-heading text-lg font-medium tracking-[0.15em] text-wine">
               Contact Details
             </h3>
             <div className="divider-gold my-6" />
@@ -139,7 +171,7 @@ export default function Booking() {
                   >
                     <CheckCircle2 className="h-10 w-10" />
                   </motion.span>
-                  <h4 className="font-display text-2xl font-bold text-wine">Request Received</h4>
+                  <h4 className="font-heading text-2xl font-medium text-wine">Request Received</h4>
                   <p className="max-w-sm font-body text-sm leading-relaxed text-wine/70">
                     Thank you — your booking request has been saved to our system. Our reservations
                     team will contact you within 24 hours.
@@ -233,7 +265,7 @@ export default function Booking() {
                     <motion.p
                       initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="sm:col-span-2 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 font-body text-sm text-red-200"
+                      className="sm:col-span-2 rounded-none border border-dustyrose/40 bg-ivory px-4 py-3 font-body text-sm text-maroon-ink"
                     >
                       {error}
                     </motion.p>
@@ -267,7 +299,7 @@ export default function Booking() {
 
           {/* Offs directory */}
           <div id="contact" className="space-y-5">
-            <Reveal index={1} className="glass-card rounded-[2rem] p-8">
+            <Reveal index={1} className="glass-card rounded-none p-8">
               <span className="section-label font-display">Get In Touch</span>
               <div className="mt-4 space-y-3">
                 {[
@@ -278,7 +310,7 @@ export default function Booking() {
                   <a
                     key={c.label}
                     href={c.href}
-                    className="group flex items-center gap-4 rounded-xl border border-wine/15 bg-white p-5 transition-all duration-400 hover:border-gold/40"
+                    className="group flex items-center gap-4 rounded-none border border-wine/15 bg-white p-5 transition-all duration-400 hover:border-gold/40"
                   >
                     <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold transition-colors group-hover:bg-wine group-hover:text-cream">
                       {c.icon}
@@ -295,7 +327,7 @@ export default function Booking() {
             </Reveal>
 
             {OFFICES.map((o, i) => (
-              <Reveal index={i + 2} key={o.city} className="glass-card-hover rounded-[2rem] p-8">
+              <Reveal index={i + 2} key={o.city} className="glass-card-hover rounded-none p-8">
                 <div className="flex items-start gap-4">
                   <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
                     <MapPin className="h-4 w-4" />
@@ -323,7 +355,7 @@ export default function Booking() {
               </Reveal>
             ))}
 
-            <Reveal index={5} className="glass-card rounded-[2rem] p-8">
+            <Reveal index={5} className="glass-card rounded-none p-8">
               <h4 className="font-display text-xs font-bold uppercase tracking-[0.3em] text-wine">
                 Let&apos;s Connect
               </h4>
@@ -366,7 +398,7 @@ export default function Booking() {
                 key={p}
                 whileHover={{ y: -6, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="flex h-16 w-24 items-center justify-center rounded-xl border border-wine/15 bg-cream/90 p-3"
+                className="flex h-16 w-24 items-center justify-center rounded-none border border-wine/15 bg-cream/90 p-3"
               >
                 <img src={media(`/images/${p}`)} alt={`Payment option ${i + 1}`} className="h-full w-full object-contain" />
               </motion.div>

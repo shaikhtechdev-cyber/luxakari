@@ -12,6 +12,8 @@ interface Residence {
   name: string;
   location: string;
   image: string;
+  /** width / height of the render, so it is shown uncropped */
+  ratio: string;
   bullets: string[];
 }
 
@@ -21,6 +23,7 @@ const RESIDENCES: Residence[] = [
     name: "KEC Madinah",
     location: "Madinah • Saudi Arabia",
     image: media("/images/kec-madinah.png"),
+    ratio: "2560 / 960",
     bullets: [
       "92 premium serviced residences in the Al Aya project, Knowledge Economic City (KEC), professionally managed for short- to long-term rentals.",
       "Available as 2, 3 and 4-bedroom apartments plus 4-bedroom penthouses ranging from 101 sqm to 353 sqm — many with maid's suites, private balconies and generous terraces.",
@@ -36,6 +39,7 @@ const RESIDENCES: Residence[] = [
     name: "Ayn Al Khaif",
     location: "Madinah • Saudi Arabia",
     image: media("/images/ayn-al-khaif.png"),
+    ratio: "1920 / 651",
     bullets: [
       "56 premium three-bedroom serviced residences in the Ayn Al Khaif area of Madinah, professionally managed for short- to long-term rentals.",
       "Available in 113 sqm, 183.81 sqm and 223.35 sqm duplex penthouse layouts with private rooftop terraces designed for both lifestyle and investment.",
@@ -50,6 +54,7 @@ const RESIDENCES: Residence[] = [
     name: "Al Qasr",
     location: "Madinah • Saudi Arabia",
     image: media("/images/al-qasr.png"),
+    ratio: "1920 / 707",
     bullets: [
       "60 premium two-bedroom serviced residences in the Al Qasr area of Madinah, professionally managed by Luxakari for short- to mid-term rentals.",
       "Fully furnished in 76.56 sqm and 84.03 sqm layouts designed for comfortable living and long-term investment.",
@@ -103,26 +108,30 @@ export default function Residences() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="grid gap-10 lg:grid-cols-2 lg:gap-16"
+            className="space-y-12"
           >
+            {/* The renders are wide panoramas, so show them full width at their own
+                proportions instead of cropping them into a 4:3 box. */}
             <div className="group relative">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-wine/15">
+              <div
+                className="relative overflow-hidden rounded-[1.75rem] border border-copper/25 shadow-[0_30px_60px_-30px_rgba(58,10,18,0.45)]"
+                style={{ aspectRatio: RESIDENCES[active].ratio }}
+              >
                 <motion.img
                   key={RESIDENCES[active].image}
                   src={RESIDENCES[active].image}
-                  alt={RESIDENCES[active].name}
-                  initial={{ scale: 1.15, opacity: 0 }}
+                  alt={`Lux Residences ${RESIDENCES[active].name}`}
+                  initial={{ scale: 1.04, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                   className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-cream/70 via-transparent to-transparent" />
               </div>
               <motion.a
                 href="#hubspot-form"
                 whileHover={{ scale: 1.06, rotate: 8 }}
-                className="absolute -bottom-5 -right-5 flex h-16 w-16 items-center justify-center rounded-full bg-gold-gradient text-wine-deepest shadow-[0_16px_40px_-10px_rgba(188,109,31,0.8)]"
-                aria-label="Enquire"
+                className="absolute -bottom-6 right-8 flex h-14 w-14 items-center justify-center rounded-full bg-gold-gradient text-wine-deepest shadow-[0_16px_40px_-10px_rgba(201,138,107,0.8)]"
+                aria-label="Enquire about this residence"
               >
                 <ArrowUpRight className="h-6 w-6" />
               </motion.a>
@@ -133,10 +142,10 @@ export default function Residences() {
                 <MapPin className="h-3.5 w-3.5" />
                 {RESIDENCES[active].location}
               </p>
-              <h3 className="mt-3 font-display text-3xl font-bold uppercase text-wine lg:text-4xl">
+              <h3 className="mt-3 font-heading text-3xl font-medium text-wine lg:text-4xl">
                 Lux Residences {RESIDENCES[active].name}
               </h3>
-              <ul className="mt-7 space-y-4">
+              <ul className="mt-7 grid gap-x-12 gap-y-4 lg:grid-cols-2">
                 {RESIDENCES[active].bullets.map((b, i) => (
                   <Reveal
                     as="li"
@@ -144,7 +153,7 @@ export default function Residences() {
                     key={b}
                     className="flex items-start gap-4 font-body text-base leading-relaxed text-wine/85"
                   >
-                    <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-gold shadow-[0_0_10px_#BC6D1F]" />
+                    <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-gold shadow-[0_0_10px_#C98A6B]" />
                     {b}
                   </Reveal>
                 ))}

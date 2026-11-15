@@ -5,34 +5,49 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Authentic Luxakari palette (Elementor global colors):
-        //   primary/secondary/text = #723740
-        //   accent                 = #BC6D1F
-        //   cream (7c16097)       = #EEE8DF  -> main page background
-        //   dark  (6bf0f89)       = #3F1315  -> nav + dark buttons
-        //   white (2ee3c54)       = #FFFFFF  -> "Book Now" buttons
+        // Luxakari Brand Identity Book v1.1 §03 — three core colours
+        // (Deep Maroon #3A0A12, Rose Gold #C98A6B, Cream #EDE8DC) plus
+        // supporting colours, each with one job. The older token names below
+        // are kept so existing classes pick up the brand values.
+        maroon: {
+          DEFAULT: "#3A0A12", // Deep Maroon — grounds, covers, header bands
+          ink: "#401215", //      headings and strong text on Cream
+          raised: "#4D1820", //   highlighted cards on Deep Maroon
+          line: "#6B3840", //     divider lines on Deep Maroon
+        },
+        rosegold: "#C98A6B", //   accents, rules, eyebrows on maroon (never text on Cream)
+        ivory: "#F6F2EA", //      cards and alternate pages on Cream
+        dustyrose: "#8F4650", //  eyebrows, labels, footers on Cream
+        copper: "#9A5A3E", //     large numerals and fine rules on Cream
+        warmbrown: "#5A4240", //  body text on Cream
+        taupe: "#7A625C", //      captions and page numbers on Cream
+        sand: "#D9C9BD", //       body text on Deep Maroon
+        rose: "#B76E79", //       decorative accents only, never text
+
         wine: {
-          darkest: "#330102",
-          dark: "#3F1315",
-          cta: "#430000",
-          DEFAULT: "#723740",
-          soft: "#8A4353",
+          darkest: "#3A0A12",
+          deepest: "#3A0A12",
+          dark: "#3A0A12",
+          cta: "#3A0A12",
+          DEFAULT: "#401215",
+          soft: "#8F4650",
         },
         cream: {
-          DEFAULT: "#EEE8DF",
-          soft: "#FFFCF6",
-          deep: "#E3DBCE",
+          DEFAULT: "#EDE8DC",
+          soft: "#F6F2EA",
+          deep: "#D9C9BD",
         },
-        champagne: "#FCCAA5",
-        peach: "#FFCDA5",
+        champagne: "#C98A6B",
+        peach: "#C98A6B",
         gold: {
-          DEFAULT: "#BC6D1F",
-          dark: "#8F5416",
+          DEFAULT: "#9A5A3E",
+          dark: "#8F4650",
         },
       },
       fontFamily: {
-        heading: ["var(--font-montserrat)", "ui-sans-serif", "sans-serif"],
-        body: ["var(--font-lato)", "ui-sans-serif", "sans-serif"],
+        // §04 Typography: Cinzel for headings/numerals, Montserrat for everything else.
+        heading: ["var(--font-cinzel)", "Georgia", "serif"],
+        body: ["var(--font-montserrat)", "Arial", "sans-serif"],
       },
       letterSpacing: {
         ultra: "0.35em",

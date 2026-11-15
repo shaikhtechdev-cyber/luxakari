@@ -24,17 +24,17 @@ const SOCIALS = [
 export default function Footer() {
   return (
     <footer id="luxa-footer" className="relative overflow-hidden border-t border-wine/15 pb-10 pt-20">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(114,55,64,0.10)_0%,transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(64,18,21,0.10)_0%,transparent_45%)]" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <Reveal index={0}>
             <Image
-              src={media("/images/logo.png")}
+              src={media("/images/logo-horizontal.png")}
               alt="Luxakari Hospitality Group"
-              width={200}
-              height={52}
-              className="h-12 w-auto"
+              width={1152}
+              height={484}
+              className="h-24 w-auto"
             />
             <p className="mt-6 max-w-sm font-body text-base leading-relaxed text-wine/70">
               Luxakari merges premium hospitality standards with sophisticated residential living —
