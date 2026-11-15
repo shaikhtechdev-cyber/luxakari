@@ -110,12 +110,13 @@ export default function Residences() {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-12"
           >
-            {/* The renders are wide panoramas, so show them full width at their own
-                proportions instead of cropping them into a 4:3 box. */}
+            {/* The renders are wide panoramas, so from tablet up show them full width at
+                their own proportions (no crop). On phones a 16:10 frame keeps them tall
+                enough to see, cropping only the far edges. */}
             <div className="group relative">
               <div
-                className="relative overflow-hidden rounded-[1.75rem] border border-copper/25 shadow-[0_30px_60px_-30px_rgba(58,10,18,0.45)]"
-                style={{ aspectRatio: RESIDENCES[active].ratio }}
+                className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-copper/25 shadow-[0_30px_60px_-30px_rgba(58,10,18,0.45)] sm:rounded-[1.75rem] sm:[aspect-ratio:var(--ratio)]"
+                style={{ "--ratio": RESIDENCES[active].ratio } as React.CSSProperties}
               >
                 <motion.img
                   key={RESIDENCES[active].image}
@@ -130,7 +131,7 @@ export default function Residences() {
               <motion.a
                 href="#hubspot-form"
                 whileHover={{ scale: 1.06, rotate: 8 }}
-                className="absolute -bottom-6 right-8 flex h-14 w-14 items-center justify-center rounded-full bg-gold-gradient text-wine-deepest shadow-[0_16px_40px_-10px_rgba(201,138,107,0.8)]"
+                className="absolute -bottom-5 right-5 flex h-11 w-11 items-center justify-center rounded-full sm:-bottom-6 sm:right-8 sm:h-14 sm:w-14 bg-gold-gradient text-wine-deepest shadow-[0_16px_40px_-10px_rgba(201,138,107,0.8)]"
                 aria-label="Enquire about this residence"
               >
                 <ArrowUpRight className="h-6 w-6" />

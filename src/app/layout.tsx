@@ -1,21 +1,28 @@
 import type { Metadata } from "next";
-import { Cinzel, Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import AuthProvider from "@/components/AuthProvider";
 import "./globals.css";
 
 // Brand typefaces (Brand Identity Book §04): Cinzel for display, Montserrat for text.
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Self-hosted (SIL Open Font License, Latin variable fonts from Google Fonts) so the
+// build never downloads from Google — next/font/google intermittently crashed the
+// Vercel build ("Cannot read properties of null (reading '1')").
+const cinzel = localFont({
+  src: "./fonts/cinzel-latin.woff2",
+  weight: "400 700",
+  style: "normal",
   variable: "--font-cinzel",
   display: "swap",
+  fallback: ["Georgia", "serif"],
 });
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+const montserrat = localFont({
+  src: "./fonts/montserrat-latin.woff2",
+  weight: "300 700",
+  style: "normal",
   variable: "--font-montserrat",
   display: "swap",
+  fallback: ["Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {
