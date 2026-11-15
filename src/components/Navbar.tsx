@@ -21,6 +21,7 @@ interface MenuItem {
 
 const MENU: MenuItem[] = [
   { name: "Home", href: "/" },
+  { name: "Stay", href: "/#stay" },
   { name: "About", href: "/#about" },
   {
     name: "Suites",

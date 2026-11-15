@@ -26,51 +26,39 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-20"
     >
-      {/* Background — full-bleed image + dark wash */}
+      {/* Background — full-bleed muted video + dark wash. Phones get a 720p file;
+          visitors who prefer reduced motion see the still poster frame instead. */}
       <div className="absolute inset-0 -z-10">
-        <img
-          src={media("/images/hero-redefining.jpg")}
-          alt=""
-          className="h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-wine-cta/85 via-wine-dark/80 to-wine-cta/90" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(64,18,21,0.55)_0%,transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(58,10,18,0.75)_0%,transparent_50%)]" />
-
-        {!reduce && (
-          <>
-            <div className="absolute left-[8%] top-[18%] h-72 w-72 animate-float rounded-full bg-gold/25 blur-[90px]" />
-            <div
-              className="absolute right-[10%] top-[30%] h-96 w-96 animate-float rounded-full bg-wine/45 blur-[110px]"
-              style={{ animationDelay: "2.5s" }}
-            />
-            <div
-              className="absolute bottom-[12%] left-[35%] h-64 w-64 animate-float rounded-full bg-champagne/15 blur-[100px]"
-              style={{ animationDelay: "4s" }}
-            />
-          </>
+        {reduce ? (
+          <img
+            src={media("/images/hero-poster.jpg")}
+            alt=""
+            className="h-full w-full object-cover object-center"
+          />
+        ) : (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster={media("/images/hero-poster.jpg")}
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center"
+          >
+            <source media="(min-width: 768px)" src={media("/videos/hero-1080.mp4")} type="video/mp4" />
+            <source src={media("/videos/hero-720.mp4")} type="video/mp4" />
+          </video>
         )}
-
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "linear-gradient(#EDE8DC 1px, transparent 1px), linear-gradient(90deg, #EDE8DC 1px, transparent 1px)",
-            backgroundSize: "90px 90px",
-          }}
-        />
-
-        {!reduce && (
-          <div className="absolute -right-32 -top-32 h-[520px] w-[520px] animate-spin-slow opacity-20">
-            <div className="h-full w-full rounded-full border border-dashed border-champagne/60" />
-          </div>
-        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-maroon/90 via-maroon/65 to-maroon/25" />
+        <div className="absolute inset-0 bg-gradient-to-b from-maroon/50 via-transparent to-maroon/70" />
       </div>
 
       <motion.div
         style={reduce ? undefined : { y, opacity }}
         className="relative mx-auto w-full max-w-[1400px] px-5 lg:px-10"
       >
-        <div className="grid items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="max-w-3xl">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -152,55 +140,6 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Hero art */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative hidden lg:block"
-          >
-            <div className="perspective relative">
-              <motion.div
-                whileHover={{ rotateY: 6, rotateX: -4, scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 120, damping: 15 }}
-                className="preserve-3d relative aspect-[4/5] overflow-hidden rounded-none border border-champagne/25 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.9)]"
-                style={{
-                  backgroundImage: `url('${media("/images/respecting.jpg")}')`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-wine-cta via-wine-cta/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-8">
-                  <p className="font-display text-[11px] uppercase tracking-[0.3em] text-champagne">
-                    Luxakari Hospitality Group
-                  </p>
-                  <p className="mt-2 font-heading text-xl font-semibold leading-snug text-cream">
-                    Elevating everyday living through personalized care
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                animate={reduce ? undefined : { y: [0, -14, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="glass-card absolute -bottom-8 -left-10 rounded-none px-6 py-4 backdrop-blur-md"
-              >
-                <p className="font-heading text-2xl font-medium text-gold">Premium</p>
-                <p className="font-display text-[10px] uppercase tracking-[0.25em] text-wine/75">
-                  Serviced Living
-                </p>
-              </motion.div>
-
-              <motion.div
-                animate={reduce ? undefined : { y: [0, 12, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="glass-card absolute -right-6 top-10 rounded-none px-5 py-3 backdrop-blur-md"
-              >
-                <p className="font-display text-sm font-semibold text-wine">24/7 Guest Support</p>
-              </motion.div>
-            </div>
-          </motion.div>
         </div>
       </motion.div>
 

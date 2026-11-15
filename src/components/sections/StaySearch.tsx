@@ -139,7 +139,7 @@ export default function StaySearch() {
   const fieldInput = "mt-1 w-full bg-transparent font-body text-sm text-maroon-ink outline-none";
 
   return (
-    <section id="stay" className="relative bg-maroon py-20 text-cream lg:py-28">
+    <section id="stay" className="relative scroll-mt-20 bg-maroon py-20 text-cream lg:py-28">
       <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
         {/* Header */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
