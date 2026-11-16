@@ -14,6 +14,8 @@ interface Residence {
   image: string;
   /** width / height of the render, so it is shown uncropped */
   ratio: string;
+  /** portrait render: show the whole building over a blurred fill instead of cropping */
+  contain?: boolean;
   bullets: string[];
 }
 
@@ -38,8 +40,9 @@ const RESIDENCES: Residence[] = [
     id: "ayn-al-khaif",
     name: "Ayn Al Khaif",
     location: "Madinah • Saudi Arabia",
-    image: media("/images/stay-ayn-al-khaif.jpg"),
+    image: media("/images/ayn-al-khaif-front.jpg"),
     ratio: "16 / 9",
+    contain: true,
     bullets: [
       "56 premium three-bedroom serviced residences in the Ayn Al Khaif area of Madinah, professionally managed for short- to long-term rentals.",
       "Available in 113 sqm, 183.81 sqm and 223.35 sqm duplex penthouse layouts with private rooftop terraces designed for both lifestyle and investment.",
@@ -110,14 +113,21 @@ export default function Residences() {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-12"
           >
-            {/* The renders are wide panoramas, so from tablet up show them full width at
-                their own proportions (no crop). On phones a 16:10 frame keeps them tall
-                enough to see, cropping only the far edges. */}
+            {/* 16:9 frame (16:10 on phones). Landscape renders fill it; a portrait
+                render is shown whole over a blurred copy of itself. */}
             <div className="group relative">
               <div
                 className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-copper/25 shadow-[0_30px_60px_-30px_rgba(58,10,18,0.45)] sm:rounded-[1.75rem] sm:[aspect-ratio:var(--ratio)]"
                 style={{ "--ratio": RESIDENCES[active].ratio } as React.CSSProperties}
               >
+                {RESIDENCES[active].contain && (
+                  <img
+                    src={RESIDENCES[active].image}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 h-full w-full scale-110 object-cover blur-2xl brightness-75"
+                  />
+                )}
                 <motion.img
                   key={RESIDENCES[active].image}
                   src={RESIDENCES[active].image}
@@ -125,7 +135,7 @@ export default function Residences() {
                   initial={{ scale: 1.04, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-                  className="h-full w-full object-cover"
+                  className={`relative h-full w-full ${RESIDENCES[active].contain ? "object-contain" : "object-cover"}`}
                 />
               </div>
               <motion.a

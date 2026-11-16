@@ -44,7 +44,7 @@ const STAYS: Stay[] = [
     area: "Madinah · Haram",
     tag: "Rooftop terraces",
     meta: "3 bedrooms · 113–223 sqm",
-    image: media("/images/stay-ayn-al-khaif.jpg"),
+    image: media("/images/ayn-al-khaif-front.jpg"),
     city: "madinah",
     short: true,
     long: true,
