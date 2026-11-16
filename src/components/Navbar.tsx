@@ -88,7 +88,7 @@ export default function Navbar() {
                 width={1152}
                 height={484}
                 priority
-                className="hidden h-[68px] w-auto lg:block"
+                className="hidden h-[60px] w-auto lg:block"
               />
               <span className="flex items-center gap-3 lg:hidden">
                 <Image
@@ -113,7 +113,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-1.5 rounded-full px-4 py-2 font-display text-[11px] font-semibold uppercase tracking-[0.22em] transition-colors duration-300 ${
+                    className={`flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1.5 font-display text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 2xl:px-3 2xl:text-[11px] ${
                       openDropdown === item.name
                         ? "text-champagne"
                         : "text-cream hover:text-champagne"
@@ -122,7 +122,7 @@ export default function Navbar() {
                     {item.name}
                     {item.children && (
                       <ChevronDown
-                        className={`h-3 w-3 transition-transform duration-300 ${
+                        className={`h-2.5 w-2.5 transition-transform duration-300 ${
                           openDropdown === item.name ? "rotate-180" : ""
                         }`}
                       />
@@ -164,7 +164,7 @@ export default function Navbar() {
 
             <div className="flex items-center gap-3">
               <AccountMenu />
-              <a href="/#hubspot-form" className="btn-cream btn-shine hidden !px-7 !py-3 sm:inline-flex">
+              <a href="/#hubspot-form" className="btn-cream btn-shine hidden !px-5 !py-2 !text-[10px] sm:inline-flex">
                 Book Now
               </a>
               <button

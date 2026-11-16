@@ -20,9 +20,9 @@ export default function AccountMenu({ variant = "desktop", onNavigate }: { varia
     return variant === "desktop" ? (
       <Link
         href={href}
-        className="hidden items-center gap-2 rounded-full border border-cream/30 px-5 py-2.5 font-display text-[11px] font-semibold uppercase tracking-[0.22em] text-cream transition-colors hover:border-champagne hover:text-champagne sm:inline-flex"
+        className="hidden items-center gap-2 rounded-full border border-cream/30 px-4 py-2 font-display text-[10px] font-medium uppercase tracking-[0.16em] text-cream transition-colors hover:border-champagne hover:text-champagne sm:inline-flex"
       >
-        <LogIn className="h-3.5 w-3.5" />
+        <LogIn className="h-3 w-3" />
         Login
       </Link>
     ) : (
@@ -44,7 +44,7 @@ export default function AccountMenu({ variant = "desktop", onNavigate }: { varia
     <div className="hidden items-center gap-2 sm:flex">
       <span
         title={session.user.email ?? undefined}
-        className="flex max-w-[160px] items-center gap-2 truncate font-display text-[11px] font-semibold uppercase tracking-[0.22em] text-champagne"
+        className="flex max-w-[160px] items-center gap-2 truncate font-display text-[10px] font-medium uppercase tracking-[0.16em] text-champagne"
       >
         <UserRound className="h-3.5 w-3.5 shrink-0" />
         <span className="truncate">{firstName}</span>
@@ -53,7 +53,7 @@ export default function AccountMenu({ variant = "desktop", onNavigate }: { varia
         <Link
           href="/admin"
           title="Admin panel"
-          className="flex items-center gap-1.5 rounded-full border border-cream/30 px-3 py-2 font-display text-[10px] font-semibold uppercase tracking-[0.2em] text-cream transition-colors hover:border-champagne hover:text-champagne"
+          className="flex items-center gap-1.5 rounded-full border border-cream/30 px-3 py-1.5 font-display text-[10px] font-semibold uppercase tracking-[0.2em] text-cream transition-colors hover:border-champagne hover:text-champagne"
         >
           <LayoutDashboard className="h-3.5 w-3.5" />
           Admin
@@ -63,9 +63,9 @@ export default function AccountMenu({ variant = "desktop", onNavigate }: { varia
         onClick={() => signOut({ callbackUrl: "/" })}
         aria-label="Sign out"
         title="Sign out"
-        className="rounded-full border border-cream/30 p-2.5 text-cream transition-colors hover:border-champagne hover:text-champagne"
+        className="rounded-full border border-cream/30 p-2 text-cream transition-colors hover:border-champagne hover:text-champagne"
       >
-        <LogOut className="h-4 w-4" />
+        <LogOut className="h-3.5 w-3.5" />
       </button>
     </div>
   ) : (
