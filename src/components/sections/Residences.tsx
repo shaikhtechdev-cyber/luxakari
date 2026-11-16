@@ -22,8 +22,8 @@ const RESIDENCES: Residence[] = [
     id: "kec-madinah",
     name: "KEC Madinah",
     location: "Madinah • Saudi Arabia",
-    image: media("/images/kec-madinah.png"),
-    ratio: "2560 / 960",
+    image: media("/images/stay-kec-madinah.jpg"),
+    ratio: "16 / 9",
     bullets: [
       "92 premium serviced residences in the Al Aya project, Knowledge Economic City (KEC), professionally managed for short- to long-term rentals.",
       "Available as 2, 3 and 4-bedroom apartments plus 4-bedroom penthouses ranging from 101 sqm to 353 sqm — many with maid's suites, private balconies and generous terraces.",
@@ -38,8 +38,8 @@ const RESIDENCES: Residence[] = [
     id: "ayn-al-khaif",
     name: "Ayn Al Khaif",
     location: "Madinah • Saudi Arabia",
-    image: media("/images/ayn-al-khaif.png"),
-    ratio: "1920 / 651",
+    image: media("/images/stay-ayn-al-khaif.jpg"),
+    ratio: "16 / 9",
     bullets: [
       "56 premium three-bedroom serviced residences in the Ayn Al Khaif area of Madinah, professionally managed for short- to long-term rentals.",
       "Available in 113 sqm, 183.81 sqm and 223.35 sqm duplex penthouse layouts with private rooftop terraces designed for both lifestyle and investment.",
@@ -53,8 +53,8 @@ const RESIDENCES: Residence[] = [
     id: "al-qasr",
     name: "Al Qasr",
     location: "Madinah • Saudi Arabia",
-    image: media("/images/al-qasr.png"),
-    ratio: "1920 / 707",
+    image: media("/images/stay-al-qasr.jpg"),
+    ratio: "16 / 9",
     bullets: [
       "60 premium two-bedroom serviced residences in the Al Qasr area of Madinah, professionally managed by Luxakari for short- to mid-term rentals.",
       "Fully furnished in 76.56 sqm and 84.03 sqm layouts designed for comfortable living and long-term investment.",
