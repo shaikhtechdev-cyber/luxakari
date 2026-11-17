@@ -28,13 +28,17 @@
 
 html {
   scroll-behavior: smooth;
+  /* keep anchored sections clear of the fixed header */
+  scroll-padding-top: 5.5rem;
+  /* decorative frames poke past the edge; clip them without making a scroll container */
+  overflow-x: clip;
 }
 
 body {
   background-color: var(--cream);
   color: var(--wine);
   font-family: var(--font-montserrat), Arial, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::selection {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
@@ -56,8 +56,8 @@ const RESIDENCES: Residence[] = [
     id: "al-qasr",
     name: "Al Qasr",
     location: "Madinah • Saudi Arabia",
-    image: media("/images/stay-al-qasr.jpg"),
-    ratio: "16 / 9",
+    image: media("/images/al-qasr-front.jpg"),
+    ratio: "1447 / 1087",
     bullets: [
       "60 premium two-bedroom serviced residences in the Al Qasr area of Madinah, professionally managed by Luxakari for short- to mid-term rentals.",
       "Fully furnished in 76.56 sqm and 84.03 sqm layouts designed for comfortable living and long-term investment.",
@@ -71,6 +71,28 @@ const RESIDENCES: Residence[] = [
 
 export default function Residences() {
   const [active, setActive] = useState(0);
+
+  // The Portfolio menu links to #lux-residences-<id>: open that residence's tab
+  // when the page loads with that hash or the hash changes.
+  useEffect(() => {
+    const syncFromHash = () => {
+      const i = RESIDENCES.findIndex((r) => window.location.hash === `#lux-residences-${r.id}`);
+      if (i >= 0) setActive(i);
+    };
+    // Re-clicking a link whose hash is already in the URL fires no hashchange.
+    const onClick = (e: MouseEvent) => {
+      const href = (e.target as Element | null)?.closest?.("a")?.getAttribute("href") ?? "";
+      const i = RESIDENCES.findIndex((r) => href.endsWith(`#lux-residences-${r.id}`));
+      if (i >= 0) setActive(i);
+    };
+    syncFromHash();
+    window.addEventListener("hashchange", syncFromHash);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", syncFromHash);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
 
   return (
     <section id="lux-residences" className="relative py-24 lg:py-32">
@@ -86,6 +108,7 @@ export default function Residences() {
           {RESIDENCES.map((r, i) => (
             <button
               key={r.id}
+              id={`lux-residences-${r.id}`}
               onClick={() => setActive(i)}
               className={`relative rounded-full px-7 py-3 font-display text-[11px] font-semibold uppercase tracking-[0.22em] transition-colors duration-300 ${
                 active === i ? "text-wine-deepest" : "text-wine/75 hover:text-gold"
@@ -106,18 +129,21 @@ export default function Residences() {
         <AnimatePresence mode="wait">
           <motion.div
             key={RESIDENCES[active].id}
-            id={`lux-residences-${RESIDENCES[active].id}`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="space-y-12"
           >
-            {/* 16:9 frame (16:10 on phones). Landscape renders fill it; a portrait
+            {/* Frame uses each render's ratio, capped so the whole image
+                fits on screen below the header and tabs. A portrait
                 render is shown whole over a blurred copy of itself. */}
-            <div className="group relative">
+            <div
+              className="group relative mx-auto sm:max-w-[var(--fit-w)]"
+              style={{ "--fit-w": `calc((100svh - 13rem) * ${RESIDENCES[active].ratio})` } as React.CSSProperties}
+            >
               <div
-                className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-copper/25 shadow-[0_30px_60px_-30px_rgba(58,10,18,0.45)] sm:rounded-[1.75rem] sm:[aspect-ratio:var(--ratio)]"
+                className="relative overflow-hidden rounded-2xl border border-copper/25 shadow-[0_30px_60px_-30px_rgba(58,10,18,0.45)] [aspect-ratio:var(--ratio)] sm:rounded-[1.75rem]"
                 style={{ "--ratio": RESIDENCES[active].ratio } as React.CSSProperties}
               >
                 {RESIDENCES[active].contain && (

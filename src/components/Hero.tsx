@@ -113,7 +113,7 @@ export default function Hero() {
                 </a>
               </Magnetic>
               <Magnetic strength={0.2}>
-                <a href="#about" className="btn-outline border-cream/50 text-cream hover:bg-cream/10">
+                <a href="#about-arabia" className="btn-outline border-cream/50 text-cream hover:bg-cream/10">
                   Discover More
                 </a>
               </Magnetic>
@@ -144,7 +144,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.a
-        href="#about"
+        href="#stay"
         aria-label="Scroll down"
         className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-cream/60 transition-colors hover:text-champagne"
         initial={{ opacity: 0 }}

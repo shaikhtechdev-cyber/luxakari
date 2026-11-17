@@ -5,11 +5,12 @@ import { media } from "@/lib/media";
 
 const LINKS = [
   { name: "Home", href: "/" },
-  { name: "About", href: "#about" },
-  { name: "Portfolio", href: "#lux-residences" },
-  { name: "Divisions", href: "#divisions" },
-  { name: "Booking", href: "#hubspot-form" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/#about-arabia" },
+  { name: "Portfolio", href: "/#lux-residences" },
+  { name: "Divisions", href: "/#divisions" },
+  { name: "Booking", href: "/#hubspot-form" },
+  { name: "FAQ", href: "/#faq" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 const SOCIALS = [
