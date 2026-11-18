@@ -14,6 +14,8 @@ import {
   Facebook,
   Youtube,
   MessageCircle,
+  ChevronDown,
+  Navigation,
 } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
@@ -38,18 +40,21 @@ const OFFICES = [
       "Building #7416, Office #6, Street Prince Mohammad Bin Abdul Aziz, District Al-Aridh, Madinah, Saudi Arabia",
     ],
     phone: "+966 53 731 6108",
+    map: "Prince Mohammed Bin Abdulaziz Road, Al Aridh, Medina Saudi Arabia",
     wa: "https://wa.link/257bub",
   },
   {
     city: "Riyadh Office",
     lines: ["Level 7, Building 4.07, King Abdullah Financial District, Riyadh, Saudi Arabia"],
     phone: "+966 57 935 7572",
+    map: "King Abdullah Financial District, Riyadh, Saudi Arabia",
     wa: "https://wa.link/257bub",
   },
   {
     city: "Dubai Office",
     lines: ["Myedan Grandstand, 6th Floor, Meydan Road, Nad Al Sheba, Dubai, United Arab Emirates"],
     phone: "+971 58 615 9899",
+    map: "Meydan Grandstand, Nad Al Sheba, Dubai, United Arab Emirates",
     wa: "https://wa.link/257bub",
   },
 ];
@@ -73,6 +78,7 @@ const PAYMENTS = ["pay-1.png", "pay-2.png", "pay-3.png", "pay-4.png", "pay-5.png
 export default function Booking() {
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [error, setError] = useState("");
+  const [openOffice, setOpenOffice] = useState<number | null>(0);
 
   // Filled in by the stay search ("Book now" on a property card) via a window event.
   useEffect(() => {
@@ -135,7 +141,7 @@ export default function Booking() {
   }
 
   return (
-    <section id="hubspot-form" className="relative overflow-hidden py-24 lg:py-32">
+    <section id="hubspot-form" className="relative overflow-clip py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(64,18,21,0.10)_0%,transparent_50%)]" />
 
       <div className="mx-auto max-w-[1400px] px-5 lg:px-10">
@@ -145,9 +151,9 @@ export default function Booking() {
           titleClassName="text-gold-gradient"
         />
 
-        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Form */}
-          <Reveal index={0} className="glass-card relative overflow-hidden rounded-none p-8 lg:p-10">
+          <Reveal index={0} className="glass-card relative overflow-hidden rounded-none p-8 lg:sticky lg:top-28 lg:p-10">
             <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-[#C98A6B]/20 blur-[80px]" />
             <h3 className="font-heading text-lg font-medium tracking-[0.15em] text-wine">
               Contact Details
@@ -326,34 +332,88 @@ export default function Booking() {
               </div>
             </Reveal>
 
-            {OFFICES.map((o, i) => (
-              <Reveal index={i + 2} key={o.city} className="glass-card-hover rounded-none p-8">
-                <div className="flex items-start gap-4">
-                  <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
-                    <MapPin className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <h4 className="font-display text-sm font-bold uppercase tracking-[0.18em] text-wine">
-                      {o.city}
-                    </h4>
-                    {o.lines.map((l) => (
-                      <p key={l} className="mt-2 font-body text-sm leading-relaxed text-wine/70">
-                        {l}
-                      </p>
-                    ))}
+            {/* Office dropdowns: opening one shows its map (loaded only when opened). */}
+            {OFFICES.map((o, i) => {
+              const isOpen = openOffice === i;
+              return (
+                <Reveal index={i + 2} key={o.city} className="glass-card-hover rounded-none">
+                  <button
+                    type="button"
+                    id={`office-${i}`}
+                    aria-expanded={isOpen}
+                    aria-controls={`office-map-${i}`}
+                    onClick={() => setOpenOffice(isOpen ? null : i)}
+                    className="flex w-full items-start gap-4 p-8 text-left"
+                  >
+                    <span className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <span className="flex-1">
+                      <span className="flex items-center justify-between gap-4">
+                        <span className="font-display text-sm font-bold uppercase tracking-[0.18em] text-wine">
+                          {o.city}
+                        </span>
+                        <span className="flex items-center gap-1.5 font-display text-[10px] uppercase tracking-[0.2em] text-gold-dark">
+                          <span className="hidden sm:inline">{isOpen ? "Hide map" : "View map"}</span>
+                          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                        </span>
+                      </span>
+                      {o.lines.map((l) => (
+                        <span key={l} className="mt-2 block font-body text-sm leading-relaxed text-wine/70">
+                          {l}
+                        </span>
+                      ))}
+                    </span>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`office-map-${i}`}
+                        role="region"
+                        aria-labelledby={`office-${i}`}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-8 pb-5">
+                          <iframe
+                            title={`${o.city} map`}
+                            src={`https://www.google.com/maps?q=${encodeURIComponent(o.map)}&z=15&output=embed`}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            className="aspect-[16/10] w-full border border-wine/15"
+                          />
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-8 pb-8 pl-[5.5rem]">
                     <a
                       href={o.wa}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-3 inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-dark transition-colors hover:text-peach"
+                      className="inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-dark transition-colors hover:text-peach"
                     >
                       <Phone className="h-3.5 w-3.5" />
                       {o.phone}
                     </a>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(o.map)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 font-body text-sm font-semibold text-gold-dark transition-colors hover:text-peach"
+                    >
+                      <Navigation className="h-3.5 w-3.5" />
+                      Get directions
+                    </a>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
 
             <Reveal index={5} className="glass-card rounded-none p-8">
               <h4 className="font-display text-xs font-bold uppercase tracking-[0.3em] text-wine">

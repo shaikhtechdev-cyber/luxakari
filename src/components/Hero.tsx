@@ -58,16 +58,16 @@ export default function Hero() {
         style={reduce ? undefined : { y, opacity }}
         className="relative mx-auto w-full max-w-[1400px] px-5 lg:px-10"
       >
-        <div className="max-w-3xl">
+        <div className="max-w-2xl">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-7 inline-flex items-center gap-3 rounded-full border border-champagne/40 bg-champagne/10 px-5 py-2"
+              className="mb-5 inline-flex items-center gap-3 rounded-full border border-champagne/40 bg-champagne/10 px-5 py-2"
             >
               <Sparkles className="h-3.5 w-3.5 text-champagne" />
-              <span className="font-display text-[10px] font-semibold uppercase tracking-[0.35em] text-champagne">
+              <span className="font-display text-[9px] font-semibold uppercase tracking-[0.22em] text-champagne sm:text-[10px] sm:tracking-[0.35em]">
                 Makkah • Madinah • Hospitality
               </span>
             </motion.div>
@@ -75,13 +75,13 @@ export default function Hero() {
             <SplitText
               as="h1"
               text="Redefining Urban Living Through Hospitality"
-              className="font-heading text-4xl font-medium leading-[1.08] tracking-[0.01em] text-cream sm:text-5xl lg:text-[4.2rem] xl:text-[4.6rem]"
+              className="font-heading text-3xl font-medium leading-[1.12] tracking-[0.01em] text-cream sm:text-4xl lg:text-[2.9rem] xl:text-[3.2rem]"
               delay={0.4}
               stagger={0.07}
             />
 
             <motion.ul
-              className="mt-9 space-y-4"
+              className="mt-7 space-y-3"
               initial="hidden"
               animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.15, delayChildren: 1.1 } } }}
@@ -93,9 +93,9 @@ export default function Hero() {
                     hidden: { opacity: 0, x: -24 },
                     visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
                   }}
-                  className="flex items-start gap-4 font-body text-base leading-relaxed text-cream/85 lg:text-lg"
+                  className="flex items-start gap-3 font-body text-sm leading-relaxed text-cream/85 lg:text-[15px]"
                 >
-                  <span className="mt-2 h-2 w-2 shrink-0 rotate-45 bg-champagne shadow-[0_0_12px_#C98A6B]" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rotate-45 bg-champagne shadow-[0_0_12px_#C98A6B]" />
                   {point}
                 </motion.li>
               ))}
@@ -105,15 +105,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.7 }}
-              className="mt-11 flex flex-wrap items-center gap-4"
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
               <Magnetic>
-                <a href="#hubspot-form" className="btn-cream btn-shine">
+                <a href="#hubspot-form" className="btn-cream btn-shine !px-6 !py-2.5 !text-[10px]">
                   Book Now
                 </a>
               </Magnetic>
               <Magnetic strength={0.2}>
-                <a href="#about-arabia" className="btn-outline border-cream/50 text-cream hover:bg-cream/10">
+                <a href="#about-arabia" className="btn-outline border-cream/50 !px-6 !py-2.5 !text-[10px] text-cream hover:bg-cream/10">
                   Discover More
                 </a>
               </Magnetic>
@@ -123,7 +123,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 2.2 }}
-              className="mt-14 grid max-w-lg grid-cols-3 gap-6 border-t border-cream/20 pt-8"
+              className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-cream/20 pt-6"
             >
               {[
                 { n: "92", l: "KEC Residences" },
@@ -131,7 +131,7 @@ export default function Hero() {
                 { n: "60", l: "Al Qasr Units" },
               ].map((s) => (
                 <div key={s.l}>
-                  <div className="font-heading text-3xl font-medium text-champagne">{s.n}</div>
+                  <div className="font-heading text-2xl font-medium text-champagne">{s.n}</div>
                   <div className="mt-1 font-display text-[10px] uppercase tracking-[0.2em] text-cream/60">
                     {s.l}
                   </div>

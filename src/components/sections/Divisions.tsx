@@ -195,10 +195,10 @@ export default function Divisions() {
             <div className="relative order-1 px-5 py-5 lg:order-2">
               <div className="pointer-events-none absolute left-0 top-0 h-32 w-36 rounded-tl-[2rem] border-l-2 border-t-2 border-copper/70" />
               <div className="pointer-events-none absolute bottom-0 right-0 h-48 w-36 rounded-br-[2rem] border-b-2 border-r-2 border-copper/70" />
-              <div className="relative aspect-[5/4] overflow-hidden rounded-[1.75rem]">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-[1.75rem]">
                 <img
-                  src={media("/images/lux-drive-chauffeur.jpg")}
-                  alt="A Lux Drive chauffeur holding the car door, with Masjid an-Nabawi behind"
+                  src={media("/images/lux-drive-desert.jpg")}
+                  alt="A Lux Drive chauffeur holding the rear door of a black luxury car among desert dunes"
                   className="h-full w-full object-cover"
                 />
               </div>

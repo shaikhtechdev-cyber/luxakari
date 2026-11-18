@@ -13,7 +13,7 @@ Photos added in the November 2026 image audit. All are **CC0 (public domain dedi
 | serviced-apartment.jpg | Bedroom decor interior | CC0 1.0 | rawpixel | https://www.rawpixel.com/image/6036450/photo-image-public-domain-wood-house |
 | spa-sauna.jpg | (untitled) | CC0 1.0 | rawpixel | https://www.rawpixel.com/image/5946172/free-public-domain-cc0-photo |
 
-Supplied by Luxakari (November 2026 section designs): global-standard.jpg, shift-chauffeur.jpg, lifestyle-pool.jpg, lux-design-collage.jpg, lux-drive-chauffeur.jpg (cropped from the Lux Drive mockup), lux-concierge-desk.jpg.
+Supplied by Luxakari (November 2026 section designs): global-standard.jpg, shift-chauffeur.jpg, lifestyle-pool.jpg, lux-design-collage.jpg, lux-drive-chauffeur.jpg (cropped from the Lux Drive mockup), lux-concierge-desk.jpg, lux-drive-desert.jpg (current Lux Drive photo), stay-kec-madinah.jpg, ayn-al-khaif-front.jpg, al-qasr-front.jpg, stay-project-12.jpg.
 
 All other images in `public/images` (and on Cloudinary under `luxakari/images/`) were supplied by Luxakari.
 
